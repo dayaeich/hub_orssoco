@@ -10,7 +10,6 @@ def gerar_analise(texto_transcricao, prompt_personalizado):
         "Content-Type": "application/json"
     }
 
-    # Monta o prompt final: prompt personalizado + texto da transcrição
     prompt_final = f"{prompt_personalizado}\n\nTexto da Transcrição:\n{texto_transcricao}"
 
     data = {

@@ -1,27 +1,20 @@
 from dotenv import load_dotenv
 import os
 
-# Carregar variáveis do .env
 load_dotenv()
 
-# Notion
 NOTION_TOKEN = os.getenv("NOTION_TOKEN")
 NOTION_DATABASE_ID = os.getenv("NOTION_DATABASE_ID")
 
-# OpenRouter (análises de transcrição)
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-# AssemblyAI (transcrição de áudios)
 ASSEMBLY_API_KEY = os.getenv("ASSEMBLY_API_KEY")
 
-# OpenAI (Assistente para responder no Telegram)
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 ASSISTANT_ID = os.getenv("ASSISTANT_ID")
 
-# Telegram
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 
-# Mapeamento dos prompts para análise automática
 PROMPTS = {
     "Transcrição - Qualificação": (
         "Analise a transcrição de qualificação a seguir.\n"

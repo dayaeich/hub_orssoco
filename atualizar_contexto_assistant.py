@@ -5,7 +5,7 @@ def atualizar_contexto_local():
     """Gera o contexto e salva em um arquivo local."""
     contexto = gerar_contexto_geral()
 
-    os.makedirs("dados", exist_ok=True)  # Garante que a pasta 'dados' existe
+    os.makedirs("dados", exist_ok=True)  
 
     with open("dados/contexto_atualizado.txt", "w", encoding="utf-8") as f:
         f.write(contexto)

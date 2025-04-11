@@ -1,5 +1,5 @@
 from flask import Flask
-from main import main  # Importa sua função main
+from main import main  
 
 app = Flask(__name__)
 

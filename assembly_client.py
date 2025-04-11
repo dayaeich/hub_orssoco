@@ -53,7 +53,6 @@ def transcrever_audio(url_audio, page_id):
                 print("\n✅ Transcrição concluída!")
                 texto_transcrito = resultado.json()["text"]
                 
-                # Atualiza a transcrição no Notion
                 print("📥 Atualizando transcrição no Notion...")
                 atualizar_transcricao_qualificacao(page_id=page_id, texto_transcricao=texto_transcrito)
                 

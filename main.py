@@ -7,7 +7,6 @@ from config import NOTION_TOKEN, PROMPTS
 from notion_client import Client
 from google_drive_uploader import upload_transcricao
 
-# Conectar no Notion
 notion = Client(auth=NOTION_TOKEN)
 
 def extrair_links(texto):

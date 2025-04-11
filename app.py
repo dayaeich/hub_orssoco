@@ -6,7 +6,6 @@ from config import TELEGRAM_TOKEN, OPENAI_API_KEY, ASSISTANT_ID
 
 app = Flask(__name__)
 
-# Função para enviar mensagem no Telegram
 def enviar_mensagem_telegram(chat_id, mensagem):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     payload = {
@@ -18,7 +17,6 @@ def enviar_mensagem_telegram(chat_id, mensagem):
     except Exception as e:
         print(f"Erro ao enviar mensagem para Telegram: {e}")
 
-# Função para consultar o Assistente da OpenAI
 def consultar_assistente_openai(pergunta_usuario):
     try:
         headers = {
@@ -27,7 +25,6 @@ def consultar_assistente_openai(pergunta_usuario):
             "Content-Type": "application/json"
         }
 
-        # Cria thread
         thread_response = requests.post(
             "https://api.openai.com/v1/threads",
             headers=headers
@@ -35,7 +32,6 @@ def consultar_assistente_openai(pergunta_usuario):
         thread_response.raise_for_status()
         thread_id = thread_response.json()["id"]
 
-        # Envia pergunta para thread
         mensagem_payload = {
             "role": "user",
             "content": pergunta_usuario
@@ -46,7 +42,6 @@ def consultar_assistente_openai(pergunta_usuario):
             json=mensagem_payload
         )
 
-        # Cria execução
         run_payload = {
             "assistant_id": ASSISTANT_ID
         }
@@ -58,7 +53,6 @@ def consultar_assistente_openai(pergunta_usuario):
         run_response.raise_for_status()
         run_id = run_response.json()["id"]
 
-        # Espera a execução terminar
         status = "queued"
         while status in ["queued", "in_progress"]:
             check_response = requests.get(
@@ -67,7 +61,6 @@ def consultar_assistente_openai(pergunta_usuario):
             )
             status = check_response.json()["status"]
 
-        # Busca resposta final
         mensagens_response = requests.get(
             f"https://api.openai.com/v1/threads/{thread_id}/messages",
             headers=headers
@@ -83,7 +76,6 @@ def consultar_assistente_openai(pergunta_usuario):
         print(f"Erro ao consultar Assistente: {e}")
         return "❌ Erro ao consultar o assistente."
 
-# Rota padrão para receber mensagens do Telegram
 @app.route('/', methods=['POST'])
 def webhook_telegram():
     data = request.get_json()
@@ -97,7 +89,6 @@ def webhook_telegram():
 
     return "OK", 200
 
-# Rota para rodar o main.py manualmente
 @app.route('/main', methods=['POST'])
 def rodar_main():
     from main import main
